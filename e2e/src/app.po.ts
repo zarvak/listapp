@@ -10,6 +10,14 @@ export class AppPage {
   }
 
   dragAndDropTest(): Promise<unknown> {
+    //fill the list if it has less than 2 elements, so we can properly test drag and drop
+    element.all(by.css('.item')).count().then(function(size){
+      while (size < 2) {
+        element(by.id('add')).click();
+        size++;
+      }
+    });
+
     // Note: Mouse actions do not work on Chrome with the HTML5 Drag and Drop API due to a known Chromedriver issue
     // source: https://www.protractortest.org/#/api?view=webdriver.WebDriver.prototype.actions
     // source: https://bugs.chromium.org/p/chromedriver/issues/detail?id=841
